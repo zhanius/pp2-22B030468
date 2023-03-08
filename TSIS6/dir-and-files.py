@@ -18,7 +18,6 @@ print('Writable:', os.access(__file__, os.W_OK))
 print('Executable:', os.access(__file__, os.X_OK))
 
 #3. Write a Python program to test whether a given path exists or not. If the path exist find the filename and directory portion of the given path.
-import os
 p = (r"C:\Users\shakh\Desktop\PP2 Python")
 
 if os.path.exists(p):
@@ -29,7 +28,7 @@ else:
     print("pass doesnt exist!")
 
 #4. Write a Python program to count the number of lines in a text file.
-f = open(r"U:\всё\учеба\2022-2023\pp2\pp2-22B030473-UShyndali\lab6\dir_and_files\sometext.txt")
+f = open(r"C:\Users\shakh\Desktop\PP2 Python\TSIS6\sometext.txt")
 cnt = 0
 for lines in f:
     cnt += 1
@@ -43,7 +42,7 @@ for i in a:
 
 #6. Write a Python program to generate 26 text files named A.txt, B.txt, and so on up to Z.txt.
 for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
-    f=open("{}.txt".format(i), "x")
+    f = open("{}.txt".format(i), "x")
     
 #7. Write a Python program to copy the contents of a file to another file.
 f1=open("fromhere.txt", "r")
@@ -52,8 +51,7 @@ for line in f1:
     f2.write(line)
 
 #8. Write a Python program to delete file by specified path. Before deleting check for access and whether a given path exists or not.
-import os
-p=(r"U:\всё\учеба\2022-2023\pp2\pp2-22B030473-UShyndali\lab6\dir_and_files\thisfieiswillbedeleted.txt")
+p=(r"C:\Users\shakh\Desktop\PP2 Python\TSIS6\smthng.txt")
 if os.path.exists(p):
     os.remove(p)
 else:
