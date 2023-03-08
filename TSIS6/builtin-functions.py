@@ -33,5 +33,7 @@ print("The square root of {} after {} miliseconds is:".format(tm,math.sqrt(n)))
 #5. Write a Python program with builtin function that returns True if all elements of the tuple are true.
 a=[True, False, True]
 b=[True, 56, True]
+
+
 print(all(a))
 print(all(b))
