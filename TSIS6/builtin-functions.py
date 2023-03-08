@@ -28,7 +28,7 @@ else:
 n = int(input())
 tm = float(input())
 time.sleep(tm/1000)
-print("The square root of {} after {} miliseconds is:".format(tm,math.sqrt(n)))
+print("The square root of {} after {} miliseconds is:".format(math.sqrt(n), tm/1000))
 
 #5. Write a Python program with builtin function that returns True if all elements of the tuple are true.
 a=[True, False, True]
