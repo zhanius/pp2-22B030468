@@ -3,21 +3,20 @@ import pygame
 pygame.init()
 
 screen = pygame.display.set_mode((700, 600))
-RED = (255, 0, 0)
+red = (255, 0, 0)
 x = 337.5
 y = 287.5
 pos = (x, y)
 pygame.display.set_caption("Red Ball")
 clock = pygame.time.Clock()
-running = True
 fps = 30
 
-while running:
+while True:
     clock.tick(fps)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            done = False
+            exit()
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
@@ -36,5 +35,5 @@ while running:
 
 
     screen.fill((0, 200, 200))
-    pygame.draw.circle(screen, RED, pos, 25)
+    pygame.draw.circle(screen, red, pos, 25)
     pygame.display.flip()
