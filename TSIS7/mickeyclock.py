@@ -2,7 +2,6 @@ import pygame
 from datetime import datetime
 import math
 
-
 #initialization
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -14,7 +13,6 @@ sec = time.second
 min = time.minute
 running = True
 
-
 #load. images 
 clock_image = pygame.transform.scale(pygame.image.load('mickeyclock.jpeg'), (800, 600))
 sechand_image = pygame.image.load('sec.png')
@@ -25,7 +23,6 @@ minhand_image = pygame.image.load('min.png')
 minhand_image = pygame.transform.scale(minhand_image, (200, 50))
 minhand_rect = minhand_image.get_rect()
 minhand_rect.center = (400, 300)
-
 
 
 while True:
