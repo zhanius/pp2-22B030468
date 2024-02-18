@@ -1,0 +1,131 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include",
+						"C:/mingw64tdm/include",
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include-fixed",
+						"C:/mingw64tdm/x86_64-w64-mingw32/include"
+					],
+					"linkDirectories" : 
+					[
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2",
+						"C:/mingw64tdm/x86_64-w64-mingw32/lib",
+						"C:/mingw64tdm/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"mingw32",
+						"gcc",
+						"moldname",
+						"mingwex",
+						"pthread",
+						"advapi32",
+						"shell32",
+						"user32",
+						"kernel32",
+						"mingw32",
+						"gcc",
+						"moldname",
+						"mingwex"
+					]
+				},
+				"path" : "C:/mingw64tdm/bin/gcc.exe",
+				"version" : "4.9.2"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++",
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/x86_64-w64-mingw32",
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++/backward",
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include",
+						"C:/mingw64tdm/include",
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/include-fixed",
+						"C:/mingw64tdm/x86_64-w64-mingw32/include"
+					],
+					"linkDirectories" : 
+					[
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2",
+						"C:/mingw64tdm/x86_64-w64-mingw32/lib",
+						"C:/mingw64tdm/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"C:/mingw64tdm/lib/gcc/x86_64-w64-mingw32/4.9.2/libstdc++.a",
+						"mingw32",
+						"gcc",
+						"moldname",
+						"mingwex",
+						"pthread",
+						"advapi32",
+						"shell32",
+						"user32",
+						"kernel32",
+						"mingw32",
+						"gcc",
+						"moldname",
+						"mingwex"
+					]
+				},
+				"path" : "C:/mingw64tdm/bin/c++.exe",
+				"version" : "4.9.2"
+			},
+			"language" : "CXX",
+			"sourceFileExtensions" : 
+			[
+				"C",
+				"M",
+				"c++",
+				"cc",
+				"cpp",
+				"cxx",
+				"mm",
+				"mpp",
+				"CPP",
+				"ixx",
+				"cppm"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "C:/mingw64tdm/bin/windres.exe"
+			},
+			"language" : "RC",
+			"sourceFileExtensions" : 
+			[
+				"rc",
+				"RC"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}

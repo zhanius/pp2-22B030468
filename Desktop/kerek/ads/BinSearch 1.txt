@@ -1,0 +1,430 @@
+Все задачи из этой лаб. работы можно условно поделить на 2 вида. Первые это задачи на измененный классический бинарный поиск. То есть в этих
+задачах главное догодаться каким образом привести задачу в классический вид и какой элемент нам нужен(первое больше или последнее меньше|равно).
+Задачи же второго типа относятся к так называемому бинарному поиску по ответу. Это задачи в которых в каком то отрезке мы делаем запросы и 
+по ответу на эти запросы должны понять где лежит ответ.
+Тип 1 это задачи A, C, D, F, H, I.
+Тип 2 это задачи B, E, G, J.
+Начнем с задач первого уровня и с самой легкой задачи.
+
+I Binary search
+Тут максильмально классический бинарный поиск. Нам дан отсортированный массив из чисел и нужно ответить есть ли число х в массиве.
+Можно решить эту задачу тем что ищем последний элемент в массиве который меньше или равен числу х.
+Для массива [1, 4, 5, 7] и числа 4 это будет тот же 4. Получается если то число которое мы нашли равно числу х то отвечаем YES.
+Иначе же как для массива [1, 4, 5, 7] число 3. У которого последнее меньше или равно 3 результатом бинарного поиска будет 1 и оно не 
+равно 3. То есть отвечаем NO.
+Код:
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+
+    int n;
+    cin >> n;
+    vector<int> nums(n);
+    for(int i = 0 ; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    int x;
+    cin >> x;
+    int l = 0, r = n;
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] <= x)
+            l = mid;
+        else
+            r = mid;
+    }
+    (nums[l] == x) ? cout << "Yes": cout << "No";
+    return 0;
+}
+
+A-Snake
+Задача интересна и необычна тем что бинарный поиск тут производиться в 2 плоскостях так как Массив 2 мерный. Но как мы можем заметить он так же отсортированный. То есть 
+нам не составит труда по нему передвигаться с помощью бинарного поиска. Спрашивается как это можно сделать. Все просто 
+Сперва мы попробуем найти такую строку что ее максимальный элемент строки больше числа запроса (обусловимся что в этой задаче они тоже х) и уже в этой строке ищем наше число.
+Поиск строки в коде выглядит следующим образом.
+
+	int li = 0, ri = n;
+        while(li + 1 < ri) {
+            int mid = (li + ri)/2;
+            int midNum;
+
+            if(mid % 2 == 0) {
+                midNum = arr[mid][0];
+            } else {
+                midNum = arr[mid][m-1];
+            }
+            if(midNum >= x)
+                li = mid;
+            else
+                ri = mid;
+        }
+
+и прошу обратить внимание на часть 
+	    int midNum;
+
+            if(mid % 2 == 0) {
+                midNum = arr[mid][0];
+            } else {
+                midNum = arr[mid][m-1];
+            }
+
+В чем ее смысл? Дело в том что хоть и строки в целом идут по уменьшению но по разному. То есть в четных самый большой элемент строки находиться слева а иначе справа. 
+Таким образом самое левое это arr[mid][0] в другом случае arr[mid][m-1]. И именно с самым большим элементом строки мы и сравниваем.
+		if(midNum >= x)
+                    lj = mid;
+                else
+                    rj = mid;
+
+А дальше уже после того нашли строку. Дело остается за малым. В отсортированной строке найти последнее число меньше или равно х.
+И для каждой строки он разный в зависимости в какую сторону он растет.
+	if(li%2 == 0) {
+            while(lj + 1 < rj) {
+                int mid = (lj + rj)/2;
+                int midNum = arr[li][mid];
+                if(midNum >= x)
+                    lj = mid;
+                else
+                    rj = mid;
+            }
+        } else {
+            while(lj + 1 < rj) {
+                int mid = (lj + rj)/2;
+                int midNum = arr[li][mid];
+                if(midNum <= x)
+                    lj = mid;
+                else
+                    rj = mid;
+            }
+        }
+Дальше после того нашли число просто пробуем ответить. Если он есть то координаты и иначе же -1. 
+Полный код
+#include <bits/stdc++.h>
+
+using namespace std;
+int main() {
+    int t;
+    cin >> t;
+    int test[t];
+    for(int i = 0 ; i <t ; i++)
+        cin >> test[i];
+    int n, m;
+    cin >> n >> m;
+    int arr[n][m];
+    for(int i = 0 ; i < n; i++) {
+        for(int j = 0 ; j < m;  j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    for(int i = 0 ; i < t ; i++) {
+        int x = test[i];
+        int li = 0, ri = n;
+        while(li + 1 < ri) {
+            int mid = (li + ri)/2;
+            int midNum;
+            if(mid % 2 == 0) {
+                midNum = arr[mid][0];
+            } else {
+                midNum = arr[mid][m-1];
+            }
+            if(midNum >= x)
+                li = mid;
+            else
+                ri = mid;
+        }
+        int lj = 0, rj = m;
+        if(li%2 == 0) {
+            while(lj + 1 < rj) {
+                int mid = (lj + rj)/2;
+                int midNum = arr[li][mid];
+                if(midNum >= x)
+                    lj = mid;
+                else
+                    rj = mid;
+            }
+        } else {
+            while(lj + 1 < rj) {
+                int mid = (lj + rj)/2;
+                int midNum = arr[li][mid];
+                if(midNum <= x)
+                    lj = mid;
+                else
+                    rj = mid;
+            }
+        }
+        int res = arr[li][lj];
+        if(res == x)
+            cout << li << " " << lj << endl;
+        else
+            cout << -1 << endl;
+    }
+
+    return 0;
+}
+
+D-Patchwork Staccato II (C-Patchwork Staccato I)
+Различие в этих задачах в том что первую часть можно решить перебором.
+Сразу лучше разобраться 2 часть так как она так же может являтся ответом на 1 часть.
+
+В этой задаче нам нужно найти не просто число а целый отрезок числа которого входит в l1, r1 и потом еще второй отрезок для l2, r2. Ответом является сумма отрезков(этой и будет колличеством чисел).
+Звучит довольно страшно но не стоит пугаться такого рода задач. Первое что нам нужно сделать это нужно найти левую сторону отрезка. Как оказывается это просто первое число которое больше
+l1 то есть
+	 
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] >= l1)
+            r = mid;
+        else
+            l = mid;
+    }
+
+и ответ будет в числе r.
+Права же сторона отрезка будет последнее число которое меньше или равно r1.
+И это мы тоже умеем делать 
+
+   while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] <= rx)
+            l = mid;
+        else
+            r = mid;
+    }
+Вот таким образом.
+Тогда давайте в итоге сперва напишем функцию который по данному массиму находит для нее отрезок в массиве в котором все числа между lx и rx.
+
+pair<int , int> getRange(vector<int> &nums, int lx, int rx) {
+    pair<int, int> res = {-1, -2};
+
+    if(nums.back() < lx || nums[0] > rx)
+        return res;
+
+    int l = -1, r = nums.size()-1;
+
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] >= lx)
+            r = mid;
+        else
+            l = mid;
+    }
+    res.first = r;
+
+    l = 0;
+    r = nums.size();
+
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] <= rx)
+            l = mid;
+        else
+            r = mid;
+    }
+
+    res.second = l;
+
+    return res;
+}
+
+Часть с
+pair<int, int> res = {-1, -2};
+Просто является защитой от отрезков которых нет. Допустим как для массива nums = [1, 10000] l1 = 2, r1 = 10;
+В таких кейсах у нас ничего плохого не произайдет и мы вернем отрицательный отрезок который мы потом проверим.
+
+Если мы уже умеем находит отрезки то и колличистов числе которые лежат между l1, r1 & l2, r2 очень легко
+допустим 
+	pair<int, int> firstRange = getRange(nums, l1, r1);
+        pair<int, int> secondRange = getRange(nums, l2, r2);
+нашли мы отрезки и теперь их сумма будет
+	max(0, firstRange.second - firstRange.first + 1) + max(0, secondRange.second - secondRange.first + 1);
+Почему мы берем максимум из отрезка и 0? Это у нас та самая защита от отрицательных отрезков (в таких случаем просуммируется 0).
+Дальше же есть моменты где один из отрезков либо лежит в другом
+(firstRange.second >= secondRange.second && firstRange.first <= secondRange.first) // (secondRange.second >= firstRange.second && secondRange.first <= firstRange.first)
+или так или иначе пересикаются 
+firstRange.first <= secondRange.first && firstRange.second >= secondRange.first) // (secondRange.first <= firstRange.first && secondRange.second >= firstRange.first)
+в такие моменты нужно просто эти лишние пересичения отнять. Так как мы их просуммировали 2 раза.
+И как итог наш код выглядит вот так:
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+pair<int , int> getRange(vector<int> &nums, int lx, int rx) {
+    pair<int, int> res = {-1, -2};
+
+    if(nums.back() < lx || nums[0] > rx)
+        return res;
+
+    int l = -1, r = nums.size()-1;
+    
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] >= lx)
+            r = mid;
+        else
+            l = mid;
+    }
+    res.first = r;
+	
+    l = 0;
+    r = nums.size();
+
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(nums[mid] <= rx)
+            l = mid;
+        else
+            r = mid;
+    }
+
+    res.second = l;
+
+    return res;
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+    vector<int> nums(n);
+    for(int i = 0 ; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    sort(nums.begin(), nums.end());
+    while(q--) {
+        int l1, r1, l2, r2;
+        cin >> l1 >> r1 >> l2 >> r2;
+        pair<int, int> firstRange = getRange(nums, l1, r1);
+        pair<int, int> secondRange = getRange(nums, l2, r2);
+        int c = 0;
+        c += max(0, firstRange.second - firstRange.first + 1);
+        c += max(0, secondRange.second - secondRange.first + 1);
+        if(firstRange.second >= secondRange.second && firstRange.first <= secondRange.first)
+            c -= max(0, secondRange.second - secondRange.first + 1);
+        else if(secondRange.second >= firstRange.second && secondRange.first <= firstRange.first)
+            c -= max(0, firstRange.second - firstRange.first + 1);
+        else if(firstRange.first <= secondRange.first && firstRange.second >= secondRange.first)
+            c -= max(0, firstRange.second - secondRange.first + 1);
+        else if(secondRange.first <= firstRange.first && secondRange.second >= firstRange.first)
+            c -= max(0, secondRange.second - firstRange.first + 1);
+        cout << c << endl;
+    }
+
+    return 0;
+}
+
+
+
+F-Win me if you can!
+Очередная задача на НАЙДИ МНЕ ПОСЛЕДНЕЕ ЧИСЛО КОТОРОЕ МЕНЬШЕ ИЛИ РАВНО НАШЕМУ!!!
+Только тут проблемка вроде начинается в моменте нахождения суммы сил побитых соперников, но и это мы сейчас решим.
+Сперва отсортируем иначе мы просто не сможем запустить бинарый поиск. 
+Дальше же нужно записать префикс сумму(рекомендую прочитать про алгоритм если не знакомы. Если про него еще написать будет слишком большой гайд) 
+этого массива для нахождение суммы всех чисел до id.
+
+int getLastCompetitor(vector<int> &competitors, int power) {
+    if(power < competitors[0])
+        return -1;
+    int l = 0, r = competitors.size();
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(competitors[mid] <= power)
+            l = mid;
+        else
+            r = mid;
+    }
+    return l;
+}
+Будет нашим поиском.
+
+ prefSum[0] = competitors[0];
+    for(int i = 1; i < n; i++)
+        prefSum[i] = competitors[i] + prefSum[i-1];
+наша префикс сумма.
+
+И как этог имеем.
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int getLastCompetitor(vector<int> &competitors, int power) {
+    if(power < competitors[0])
+        return -1;
+    int l = 0, r = competitors.size();
+    while(l + 1 < r) {
+        int mid = (l+r)/2;
+        if(competitors[mid] <= power)
+            l = mid;
+        else
+            r = mid;
+    }
+    return l;
+}
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> competitors(n);
+    vector<int> prefSum(n);
+    for(int &i : competitors)
+        cin >> i;
+    sort(competitors.begin(), competitors.end());
+    prefSum[0] = competitors[0];
+    for(int i = 1; i < n; i++)
+        prefSum[i] = competitors[i] + prefSum[i-1];
+    int tests;
+    cin >> tests;
+    while (tests--) {
+        int power;
+        cin >> power;
+        int id = getLastCompetitor(competitors, power);
+        cout << (id != -1? id+1: 0) << ' ' << (id != -1 ? prefSum[id]: 0) << endl;
+    }
+
+    return 0;
+}
+
+H-Debugging
+Очень схожа с F-Win me if you can!. Только нам уже напрямую говорят что нужно как раз таки по префикс сумме и искать наше число.
+Можно сказать задача сводиться до сделай бинарный поиск по префикс сумме. Так как каждый наш файл имеет колличество строк и каждое след файл идет после предущего.
+То есть суммируются их колличество. 
+Код короткий как Джарахов (простите)
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+
+    int n, m;
+    cin >> n >> m;
+    vector<int> nums(n);
+    for(int i = 0 ; i < n; i++) {
+        cin >> nums[i];
+        if(i)
+            nums[i] += nums[i-1];
+    }
+
+    while(m--) {
+        int mistakeNum;
+        cin >> mistakeNum;
+        int l = -1, r = n-1;
+        while(l + 1 < r) {
+            int mid = (l+r)/2;
+            if(nums[mid] >= mistakeNum)
+                r = mid;
+            else
+                l = mid;
+        }
+        cout << r+1 << endl;
+    }
+
+    return 0;
+}
+
+
+
