@@ -1,3 +1,0 @@
-C:/Users/shakh/Desktop/ads/cmake-build-debug/CMakeFiles/ads.dir
-C:/Users/shakh/Desktop/ads/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/shakh/Desktop/ads/cmake-build-debug/CMakeFiles/rebuild_cache.dir
